@@ -10,7 +10,9 @@ var level = "hard";
 var pickedColor = reset();
 colorDisplay.textContent = pickedColor;
 
+// To get number of colored squares according to the level of game.
 function numberOfColors(){
+	console.log(level);
 	return level == "hard" ? 6 : 3
 }
 // code for switching between easy and hard levels
@@ -19,7 +21,7 @@ for(var i = 0; i < modeButtons.length; i++){
 		modeButtons[0].classList.remove("selected");
 		modeButtons[1].classList.remove("selected");
 		this.classList.add("selected");
-		level = this.textContent
+		level = this.textContent.toLowerCase();
 		pickedColor = reset();
 		colorDisplay.textContent = pickedColor;
 	});
@@ -80,6 +82,7 @@ function reset(){
 // function generateRandomColours(num=0){
 function generateRandomColours(){
 	var colors = [];
+	console.log(numberOfColors());
 	for(i = 0; i < numberOfColors(); i++){
 		colors[i] = generateColors();
 	}
