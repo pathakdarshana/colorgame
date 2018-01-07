@@ -1,4 +1,6 @@
 var colors = [];
+var level = "hard";
+var pickedColor ;
 var squares = document.querySelectorAll(".square");
 var message = document.querySelector("#message");
 var colorDisplay = document.querySelector("h1 span");
@@ -6,26 +8,34 @@ var resetEvent = document.querySelector("#reset");
 var buttonReset = document.querySelector("#reset");
 var h1 = document.querySelector("h1");
 var modeButtons = document.querySelectorAll(".mode");
-var level = "hard";
-var pickedColor = reset();
-colorDisplay.textContent = pickedColor;
+init();
+
+function init(){
+	reset();
+	colorDisplay.textContent = pickedColor;
+	levelButtons();
+
+}
 
 // To get number of colored squares according to the level of game.
 function numberOfColors(){
 	return level == "hard" ? 6 : 3
 }
 // code for switching between easy and hard levels
-for(var i = 0; i < modeButtons.length; i++){
-	modeButtons[i].addEventListener("click",function(){
-		modeButtons[0].classList.remove("selected");
-		modeButtons[1].classList.remove("selected");
-		this.classList.add("selected");
-		level = this.textContent.toLowerCase();
-		pickedColor = reset();
-		colorDisplay.textContent = pickedColor;
-	});
-
+function levelButtons(){
+	for(var i = 0; i < modeButtons.length; i++){
+		modeButtons[i].addEventListener("click",function(){
+			modeButtons[0].classList.remove("selected");
+			modeButtons[1].classList.remove("selected");
+			this.classList.add("selected");
+			level = this.textContent.toLowerCase();
+			reset();
+			colorDisplay.textContent = pickedColor;
+		});
+	}
 }
+
+
 // setting the color of squares for easy and hard case.
 function setColor(){
 	for(i = 0; i < squares.length; i++ ){
@@ -51,6 +61,12 @@ function setColor(){
 		});
 	}
 }
+
+function numberOfSquares(){
+
+}
+
+
 // changing the backgroung colour to clicked color when guess is correct.
 function changeColor(color){
 	for(i = 0; i < squares.length; i++){
@@ -62,9 +78,9 @@ function pickColor(){
 	var random = Math.floor(Math.random() * colors.length);
 	return random;
 }
-// 
+//the code for reset button click event 
 resetEvent.addEventListener("click", function(){
-	pickedColor =  reset();
+	reset();
 	colorDisplay.textContent = pickedColor;
 
 });
@@ -75,10 +91,9 @@ function reset(){
 	setColor();
 	buttonReset.textContent = "New Colors";
 	h1.style.background = "steelblue";
-	return colors[pickColor()];
+	pickedColor =  colors[pickColor()];
 }
 //generating random set of colors
-// function generateRandomColours(num=0){
 function generateRandomColours(){
 	var colors = [];
 	for(i = 0; i < numberOfColors(); i++){
