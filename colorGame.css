@@ -30,21 +30,26 @@ h1{
 	line-height: 1.1;
 	padding: 20px 0;
 }
+
 #colorDisplay{
 	font-size: 200%;
 }
+
 #message{
 	display: inline-block;
 	width: 20%;
 }
+
 #nav{
 	background-color: white;
 	color: black;
 	height: 30px;
 }
+
 .selected{
 	background: blue;
 }
+
 button{
 	border: none;
 	background: none;
@@ -57,8 +62,11 @@ button{
 	transition:all 0.03s;
 	outline: none;
 }
+
 button:hover{
 	color:white;
 	background: rgb(70, 130, 180);
 }
-
+.hide{
+	display: none;
+}

@@ -8,13 +8,34 @@ var resetEvent = document.querySelector("#reset");
 var buttonReset = document.querySelector("#reset");
 var h1 = document.querySelector("h1");
 var modeButtons = document.querySelectorAll(".mode");
+var helpBtn = document.querySelector("#help");
+var vid = document.querySelector(".video");
+var showVid = false;
 init();
 
 function init(){
 	reset();
 	colorDisplay.textContent = pickedColor;
 	levelButtons();
-
+	clickedHelp();
+}
+// to watch video to know about the RGB.
+function clickedHelp(){
+	helpBtn.addEventListener("click",function(){
+		showVideo(false);
+	});
+}
+// 
+function showVideo(show=true){
+	if (show){
+		vid.classList.add("hide");
+		document.querySelector(".container").classList.remove("hide");
+	}
+	else{
+		vid.classList.remove("hide");
+		document.querySelector(".container").classList.add("hide");
+		showVid = true;
+	}
 }
 
 // To get number of colored squares according to the level of game.
@@ -30,12 +51,11 @@ function levelButtons(){
 			this.classList.add("selected");
 			level = this.textContent.toLowerCase();
 			reset();
+			showVideo();
 			colorDisplay.textContent = pickedColor;
 		});
 	}
 }
-
-
 // setting the color of squares for easy and hard case.
 function setColor(){
 	for(i = 0; i < squares.length; i++ ){
@@ -61,12 +81,6 @@ function setColor(){
 		});
 	}
 }
-
-function numberOfSquares(){
-
-}
-
-
 // changing the backgroung colour to clicked color when guess is correct.
 function changeColor(color){
 	for(i = 0; i < squares.length; i++){
@@ -92,6 +106,7 @@ function reset(){
 	buttonReset.textContent = "New Colors";
 	h1.style.background = "steelblue";
 	pickedColor =  colors[pickColor()];
+	showVid = false;
 }
 //generating random set of colors
 function generateRandomColours(){
@@ -100,13 +115,12 @@ function generateRandomColours(){
 		colors[i] = generateColors();
 	}
 	return colors;
-// generating random color
 }
+// generating random color
 function generateColors(){
 	r = Math.floor(Math.random()*256);
 	b = Math.floor(Math.random()*256);
 	g = Math.floor(Math.random()*256);
 	return "rgb"+"("+ r +", "+ b +", " + g +")";
 }
-
 
